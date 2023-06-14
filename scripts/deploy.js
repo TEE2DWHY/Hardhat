@@ -24,8 +24,8 @@ const main = async () => {
     const simpleStorage = await SimpleStorage.deploy();
     console.log("Contract deployed:", simpleStorage.target);
 
-    if (network.config.chainId === "goerli" && process.env.ETHERSCAN_APIKEY) {
-      // await simpleStorage.waitForDeployment(6); // we wait for 6 bocks confirmation before proceeding to verify contract
+    if (network.config.chainId === 5 && process.env.ETHERSCAN_APIKEY) {
+      await simpleStorage.waitForDeployment(6); // we wait for 6 bocks confirmation before proceeding to verify contract
       await verifyContract(simpleStorage.target);
     }
 
