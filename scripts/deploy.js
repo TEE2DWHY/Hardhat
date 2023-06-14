@@ -25,9 +25,18 @@ const main = async () => {
     console.log("Contract deployed:", simpleStorage.target);
 
     if (network.config.chainId === "goerli" && process.env.ETHERSCAN_APIKEY) {
-      await simpleStorage.waitForDeployment(1);
+      // await simpleStorage.waitForDeployment(6); // we wait for 6 bocks confirmation before proceeding to verify contract
       await verifyContract(simpleStorage.target);
     }
+
+    // CALL CONTRACT METHODS IN HARDHAT
+    const age = await simpleStorage.retrieve()
+    console.log(age.toString())
+    const transactionResponse = await simpleStorage.newAge(8)
+    console.log(transactionResponse);
+    await transactionResponse.wait(1); // wait for one block confirmation before retireving new age value
+    const newAge = await simpleStorage.retrieve();
+    console.log(newAge.toString());
   } catch (error) {
     console.log(error.message);
   }
