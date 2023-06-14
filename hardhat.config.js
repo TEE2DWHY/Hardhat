@@ -4,6 +4,7 @@ require("@nomicfoundation/hardhat-toolbox");
 
 const GEORLI = process.env.GOERLI_URL;
 const PRIVATE_KEY = process.env.PRIVATE_KEY
+const ETHERSCAN_APIKEY = process.env.ETHERSCAN_APIKEY
 module.exports = {
   defaultNetwork: "hardhat",
   networks: {
@@ -14,4 +15,7 @@ module.exports = {
     }
   },
   solidity: "0.8.18",
+   etherscan:{
+    apiKey: ETHERSCAN_APIKEY
+  }
 };
